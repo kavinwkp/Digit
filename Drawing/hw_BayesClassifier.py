@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 from PyQt5.QtCore import Qt, QRect
 # import cv2
+import pandas as pd
 
 
 class MainWidget(QWidget):
@@ -95,6 +96,10 @@ class MainWidget(QWidget):
 
         # display image
         # print(img_array)
+        # data_df = pd.DataFrame(img_array.reshape(28, 28))
+        # writer = pd.ExcelWriter('img.xlsx')
+        # data_df.to_excel(writer, 'page_1', float_format='%.5f')
+        # writer.save()
         # plt.imshow(img_array.reshape(28, 28), cmap="binary")
         # plt.imshow(pil_img, cmap="binary")
         # plt.show()
