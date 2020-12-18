@@ -3,7 +3,7 @@ from PyQt5.Qt import QWidget, QColor, QPixmap, QIcon, QSize, QCheckBox, QFont
 from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QPushButton, QSplitter, \
     QComboBox, QLabel, QSpinBox, QFileDialog, QApplication
 from hw_PaintBoard import PaintBoard
-from NaiveBayesScratch import NaiveBayesScratch
+from NaiveBayes import NaiveBayes
 from PIL import Image, ImageQt
 import numpy as np
 import matplotlib.pyplot as plt
@@ -24,13 +24,7 @@ class MainWidget(QWidget):
 
     def __initData(self):
         self.__paintBoard = PaintBoard(self)
-        mint = tf.keras.datasets.mnist
-        (X, y), (X_test, y_test) = mint.load_data()
-        self.model = NaiveBayesScratch()
-        X = np.array(X).reshape(60000, 784)
-        self.__xtest = np.array(X_test).reshape(10000, 784)
-        self.__ytest = y_test
-        self.model.fit(X, y)
+        self.model = NaiveBayes()
 
     def __initView(self):
         self.setFixedSize(600, 400)
@@ -88,25 +82,12 @@ class MainWidget(QWidget):
         pil_img = pil_img.resize((28, 28), Image.ANTIALIAS)
         img_array = np.array(pil_img.convert('L')).reshape(784)
 
-        # display image
-        print(img_array)
         plt.imshow(img_array.reshape(28, 28), cmap="binary")
-        # plt.imshow(pil_img, cmap="binary")
-        plt.show()
-        # fig = plt.figure(figsize=(6, 6))
-        # fig.subplots_adjust(left=0, right=1, bottom=0, top=1, hspace=0.05, wspace=0.05)
-        # # 绘制数字：每张图像8*8像素点
-        # for i in range(64):
-        #     ax = fig.add_subplot(8, 8, i + 1, xticks=[], yticks=[])
-        #     ax.imshow(self.xtest[i].reshape(28, 28), cmap=plt.cm.binary, interpolation='nearest')
-        #     # 用目标值标记图像
-        #     ax.text(0, 7, str(self.ytest[i]))
-        # plt.show()
 
         self.__result = self.model.predict(img_array)
         print("result: %d" % self.__result)
         self.__lb_Result.setText("%d" % self.__result)
-
+        plt.show()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

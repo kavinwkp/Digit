@@ -112,7 +112,7 @@ def main():
     (X_train, y_train), (X_test, y_test) = minst.load_data()
     X_train = np.reshape(X_train, (X_train.shape[0], -1))
     num_train = 5000
-    num_test = 100
+    num_test = 200
     mask = range(num_train)
     X_train = X_train[mask]
     y_train = y_train[mask]
