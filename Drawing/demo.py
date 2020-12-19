@@ -1,5 +1,5 @@
 import numpy as np
-
+from past.builtins import xrange
 X_train = np.array([[6, 180, 12], [5.92, 190, 11],
                     [5.58, 170, 12], [5.92, 165, 10],
                     [5, 100, 6], [5.5, 150, 8],
@@ -71,25 +71,3 @@ for index in range(2):
     hx[index] = -0.5 * (t3 + t1 + 3 * np.log(2 * np.pi))
 print(hx)
 
-
-# count = np.array([8, 0, 7, 9, 9, 3, 6, 2, 2, 2])
-# num = np.array([8, 14, 8, 11, 14, 7, 10, 15, 2, 11])
-count = np.array([24, 0, 30, 20, 26, 21, 16, 3, 17, 9])
-num = np.array([24, 41, 32, 24, 37, 29, 24, 34, 21, 34])
-print(count)  # 正确识别数
-print(num)  # 测试样本数
-
-print("result: %f" % (np.sum(count) / np.sum(num)))       # 总正确率
-
-accurate = list()
-for i in range(10):
-    accurate.append(count[i] / num[i])
-print(np.around(accurate, 3))         # 每类正确率， 保留3位小数
-
-# samples: 100
-# result: 0.480000
-# [1.    0.    0.875 0.818 0.643 0.429 0.6   0.133 1.    0.182]
-
-# samples: 300
-# result: 0.553333
-# [1.    0.    0.938 0.833 0.703 0.724 0.667 0.088 0.81  0.265]
